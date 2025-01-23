@@ -1,0 +1,101 @@
+import React from 'react';
+import { Menu, X, MapPin, MessageSquare } from 'lucide-react';
+
+const MobileLanding = () => {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  return (
+    <div className="min-h-screen bg-gray-50">
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 h-full w-64 bg-white/90 backdrop-blur-md z-50 p-6">
+        <div className="flex items-center justify-between mb-8">
+          <img src="/api/placeholder/120/35" alt="TerraSocios" className="h-8" />
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-800">
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {isMenuOpen && (
+          <div className="space-y-4">
+            <a href="#proceso" className="block text-gray-800 p-2">Proceso</a>
+            <a href="#beneficios" className="block text-gray-800 p-2">Beneficios</a>
+            <a href="#territorio" className="block text-gray-800 p-2">Territorio APA</a>
+            <button className="w-full border-2 border-black text-black py-2 px-4 rounded">
+              Contáctanos
+            </button>
+          </div>
+        )}
+      </nav>
+
+      {/* Main Content */}
+      <div className="ml-64 min-h-screen">
+        {/* Hero Section */}
+        <div className="relative min-h-screen">
+          <div className="absolute inset-0 bg-cover bg-center" style={{ 
+            backgroundImage: `url('/api/placeholder/800/600')`,
+            filter: 'brightness(0.7)'
+          }} />
+
+          <div className="relative pt-24 px-4 pb-8 flex flex-col min-h-screen">
+            <div className="bg-white rounded-lg p-6 shadow-lg mb-8">
+              <h1 className="text-2xl font-bold text-center mb-6">INICIA TU PROCESO AQUÍ</h1>
+              <button className="w-full bg-black text-white py-3 px-6 rounded text-lg">
+                QUIERO SER SOCIO
+              </button>
+            </div>
+
+            <div className="mt-auto text-white text-center">
+              <h2 className="text-3xl font-bold mb-2">
+                Aporta tu terreno <span className="font-normal">y</span>
+              </h2>
+              <p className="text-xl">juntos creamos</p>
+              <p className="text-3xl font-bold mt-1">ganancias</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Process Section */}
+        <section id="proceso" className="py-12 px-4 bg-white">
+          <h2 className="text-2xl font-bold text-center mb-8">PROCESO</h2>
+          <div className="text-center">
+            <p className="text-lg mb-6">
+              El proceso inicia llenando la información del formulario y te contactaremos.
+            </p>
+            <button className="bg-black text-white py-3 px-6 rounded">
+              QUIERO UNIRME A TERRASOCIOS
+            </button>
+          </div>
+        </section>
+
+        {/* Benefits Section */}
+        <section id="beneficios" className="py-12 px-4">
+          <h2 className="text-2xl font-bold text-center mb-4">BENEFICIOS</h2>
+          <p className="text-center mb-8">
+            TerraSocios y el propietario <strong>comparten las ganancias</strong>, 
+            creando un negocio rentable y sostenible.
+          </p>
+
+          <div className="space-y-6">
+            {[
+              'Rentabilidad garantizada',
+              'Diversificación de ingresos',
+              'Crecimiento y éxito'
+            ].map((benefit, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gray-200 rounded-full" />
+                <h3 className="font-semibold">{benefit}</h3>
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {/* WhatsApp Button */}
+      <a href="#" className="fixed bottom-6 right-6 bg-green-500 text-white p-3 rounded-full shadow-lg">
+        <MessageSquare size={24} />
+      </a>
+    </div>
+  );
+};
+
+export default MobileLanding;

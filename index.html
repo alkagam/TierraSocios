@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerraSocios</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media-queries.css">
+    <link rel="stylesheet" href="css/paso1.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    backgroundImage: {
+                        'step-1': "url('/paso1.jpg')",
+                        'step-2': "url('/paso2.jpg')",
+                        'step-3': "url('/paso5.jpg')",
+                        'congratulations': "url('/paso6.jpg')",
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="#home">
+                <img src="/archivos terrasocios web/logo terrasocios.png" alt="TerraSocios" class="navbar__logo"/>
+            </a>
+            <!-- Botón hamburguesa para el menú (solo en pantallas pequeñas) -->
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+            <div class="nav-links dropdown-menu">
+                <a href="#proceso">Proceso</a>
+                <a href="#beneficios">Beneficios</a>
+                <a href="#territorio">Territorio ARA</a>
+                <button class="contact-btn">Contáctanos</button>
+            </div>
+            <img src="/archivos terrasocios web/redes logo_Mesa de trabajo 1 copia.png" alt="ara" class="navbar__logo"/>
+            
+        </div>
+    </nav>
+
+    <!-- Página Principal (Home) -->
+    <div id="home" class="min-h-screen relative">
+        <!-- Imagen de fondo -->
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-4.0.3');">
+            <div class="absolute inset-0 bg-black/30"></div>
+        </div>
+    
+        <!-- Contenido principal -->
+        <div class="relative max-w-7xl mx-auto px-4 py-32">
+            <div class="pt-16">
+                <!-- Contenedor principal -->
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-8 mt-8">
+                    <!-- Tarjeta Blanca Agrandada (lado izquierdo en pantallas grandes) -->
+                    <div class="bg-white rounded-lg shadow-lg p-12 w-full md:w-[400px]">
+                        <h1 class="text-4xl font-bold mb-8 text-center">INICIA TU PROCESO AQUÍ</h1>
+                        <button onclick="mostrarPasos()" class="block w-full bg-black text-white font-bold py-4 px-8 rounded-md text-xl text-center">
+                            QUIERO SER SOCIO
+                        </button>
+                    </div>
+        
+                    <!-- Texto derecho -->
+                    <div class="relative text-white text-center md:text-right md:flex md:flex-col md:items-end">
+                        <h2 class="text-2xl md:text-5xl font-bold">
+                            Aporta tu terreno <span class="text-xl md:text-4xl font-normal">y</span>
+                        </h2>
+                        <div class="text-xl md:text-4xl mt-2 md:mt-4">
+                            <p>juntos creamos</p>
+                            <p class="text-2xl md:text-5xl font-bold mt-2">ganancias</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
+
+    <!-- Sección de Pasos (inicialmente oculta) -->
+    <div id="pasos-section" class="hidden">
+        <!-- Step 1: Contact Information -->
+        <div id="step-1" class="min-h-screen flex items-center justify-start bg-cover bg-no-repeat relative" style="background-image: url('/paso1.jpg');">
+            
+            <div class="bg-white shadow-lg rounded-lg p-8 w-96 ml-16">
+                <h2 class="text-2xl font-semibold text-black mb-4 text-center">PASO 1</h2>
+                <p class="text-black font-medium text-center mb-6">Información de contacto</p>
+                <form id="form-step-1" class="space-y-4">
+                    <input type="text" id="name" placeholder="Nombre" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-green-400" required>
+                    <input type="email" id="email" placeholder="Correo" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-green-400" required>
+                    <input type="tel" id="phone" placeholder="Teléfono" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-green-400" required>
+                    <button type="button" id="next-to-step-2" class="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800">CONTINUAR</button>
+                </form>
+            </div>
+            
+            <div class="absolute bottom-4 right-4">
+                <button onclick="volverAlInicio()" class="px-6 py-2 bg-white/80 hover:bg-white/90 rounded-md text-gray-700 font-medium transition-colors">
+                    REGRESAR
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Terrain Information -->
+        <div id="step-2" class="min-h-screen flex items-center justify-start bg-cover bg-no-repeat relative hidden" style="background-image: url('/paso2.jpg');">
+            <div class="bg-white shadow-lg rounded-lg p-8 w-96 ml-16">
+                <h2 class="text-2xl font-semibold text-black mb-4 text-center">PASO 2</h2>
+                <p class="text-black font-medium text-center mb-6">Información del terreno</p>
+                <form id="form-step-2" class="space-y-4">
+                    <input type="text" id="address" placeholder="Dirección del terreno" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-green-400" required>
+                    <div class="relative">
+                        <input type="text" id="size" placeholder="Tamaño del terreno" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-green-400 pr-10" required>
+                        <span class="absolute right-3 top-2 text-gray-500">m²</span>
+                    </div>
+                    <input type="text" id="stimulated-price" placeholder="Precio estimulado" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring focus:ring-green-400" required>
+                    <button type="button" id="next-to-step-3" class="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800">CONTINUAR</button>
+                </form>
+            </div>
+            <div class="absolute bottom-4 right-4">
+                <button id="back-to-step-1" class="px-6 py-2 bg-white/80 hover:bg-white/90 rounded-md text-gray-700 font-medium transition-colors">
+                    REGRESAR
+                </button>
+            </div>
+        </div>
+        
+        <!-- Step 3: Summary -->
+        <div id="step-3" class="min-h-screen flex items-center justify-start bg-cover bg-no-repeat relative hidden" style="background-image: url('/paso 5.jpg');">
+            <div class="bg-white shadow-lg rounded-lg p-8 w-96 ml-16">
+                <h2 class="text-2xl font-semibold text-black mb-4 text-center">Estás a un paso de ser TerraSocio</h2>
+                <div id="summary" class="text-gray-600 space-y-2 mb-6">
+                    <!-- Aquí se llenará el resumen dinámico con JavaScript -->
+                    <p class="font-medium text-center">Por favor revisa los datos proporcionados antes de enviar:</p>
+                </div>
+                <button type="button" id="submit" class="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800">ENVIAR</button>
+            </div>
+            <div class="absolute bottom-4 right-4">
+                <button id="back-to-step-2" class="px-6 py-2 bg-white/80 hover:bg-white/90 rounded-md text-gray-700 font-medium transition-colors">
+                    REGRESAR
+                </button>
+            </div>
+        </div>
+        
+
+        <!-- Congratulations Page -->
+        <div id="congratulations" class="min-h-screen flex items-center justify-center bg-gray-50 relative hidden" style="background-image: url('/paso\ 6.jpg');">
+            <div class="bg-white shadow-lg rounded-lg p-8 text-center max-w-md w-full">
+                <div class="flex justify-center mb-4">
+                    <img src="/archivos terrasocios web/logo terrasocios.png" alt="TerraSocios" class="h-12">
+                </div>
+                <h2 class="text-3xl font-bold text-green-600 mb-4">¡Felicidades!</h2>
+                <p class="text-gray-700 mb-6">
+                    Te has convertido en un TerraSocio con éxito. Pronto nos pondremos en contacto contigo para continuar con el proceso.
+                </p>
+                <div class="flex justify-center mb-6">
+                    <img src="/si.png" alt="Felicidades" class="w-40 rounded-md shadow-md">
+                </div>
+                <button onclick="volverAlInicio()" type="button" class="w-full bg-black text-white py-2 rounded-md hover:bg-gray-800">
+                    IR AL HOME
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resto de secciones de la página principal -->
+    <section id="proceso" class="proceso-section">
+        <h2>PROCESO</h2>
+        <div class="proceso-content">
+            <div class="proceso-text">
+                <p>El proceso inicia llenando la información del formulario y te contactaremos.</p>
+                <button onclick="mostrarPasos()">QUIERO UNIRME A TERRASOCIOS</button>
+            </div>
+            <div class="proceso-image"></div>
+        </div>
+    </section>
+
+    <section id="beneficios" class="beneficios-section">
+        <h2>BENEFICIOS</h2>
+        <p class="beneficios-intro">TerraSocios y el propietario <strong>comparten las ganancias</strong>, creando un negocio rentable y sostenible.</p>
+        <div class="beneficios-grid">
+            <div class="beneficio-card">
+                <div class="beneficio-icon1 rentabilidad"></div>
+                <h3>Rentabilidad garantizada</h3>
+            </div>
+            <div class="beneficio-card">
+                <div class="beneficio-icon2 diversificacion"></div>
+                <h3>Diversificación de ingresos</h3>
+            </div>
+            <div class="beneficio-card">
+                <div class="beneficio-icon3 crecimiento"></div>
+                <h3>Crecimiento y éxito</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="territorio" class="territorio-section">
+        <h2>TERRITORIO ARA</h2>
+        <div class="estadisticas-grid">
+            <div class="estadistica">
+                <div class="numero">15</div>
+                <div class="label">Estados</div>
+            </div>
+            <div class="estadistica">
+                <div class="numero">21</div>
+                <div class="label">Ciudades</div>
+            </div>
+            <div class="estadistica">
+                <div class="numero">31</div>
+                <div class="label">Municipios</div>
+            </div>
+            <div class="estadistica">
+                <div class="numero">41</div>
+                <div class="label">Desarrollos</div>
+            </div>
+        </div>
+        <div class="mapa-container"></div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Avisos de privacidad</a></li>
+                        <li><a href="#">Términos y condiciones</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li>Escríbenos a terrasocios@ara.com.mx</li>
+                        <li>Tel.: 00 0000 0000</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <img src="/archivos terrasocios web/redes logo_Mesa de trabajo 1 copia.png" alt="ARA Logo" class="footer-logo">
+                <div class="social-links">
+                    <h3>Síguenos</h3>
+                    <div class="social-icons">
+                        <a href="#">@TerraSocios</a>
+                        <a href="#">@terrasocios</a>
+                        <a href="#">@terrasocios</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/1234567890" class="whatsapp-button" target="_blank" rel="noopener noreferrer">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.4 3.6C18.2 1.4 15.2 0 12 0 5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.2-1.6c1.8.9 3.8 1.4 5.8 1.4 6.6 0 12-5.4 12-12 0-3.2-1.4-6.2-3.6-8.4zM12 22c-1.8 0-3.6-.5-5.2-1.4l-.4-.2-3.8 1 1-3.8-.2-.4C2.5 15.6 2 13.8 2 12 2 6.5 6.5 2 12 2c2.6 0 5 1 6.8 2.8C20.6 6.6 21.6 9 21.6 12c0 5.5-4.5 10-9.6 10z"/>
+        </svg>
+    </a>
+
+    <script>
+        // Funciones de navegación
+        function mostrarPasos() {
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('proceso').classList.add('hidden');
+            document.getElementById('beneficios').classList.add('hidden');
+            document.getElementById('territorio').classList.add('hidden');
+            document.getElementById('pasos-section').classList.remove('hidden');
+            document.getElementById('step-1').classList.remove('hidden');
+        }
+
+        function volverAlInicio() {
+            document.getElementById('pasos-section').classList.add('hidden');
+            document.getElementById('home').classList.remove('hidden');
+            document.getElementById('proceso').classList.remove('hidden');
+            document.getElementById('beneficios').classList.remove('hidden');
+            document.getElementById('territorio').classList.remove('hidden');
+            
+            // Resetear el estado de los pasos
+            document.getElementById('step-1').classList.remove('hidden');
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('congratulations').classList.add('hidden');
+        }
+
+        function toggleMenu() {
+            const menu = document.querySelector('.dropdown-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Event Listeners para los pasos
+        document.getElementById('next-to-step-2').addEventListener('click', () => {
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+
+            if (!name || !email || !phone) {
+                alert('Por favor, completa todos los campos antes de continuar.');
+                return;
+            }
+
+            if (!validateEmail(email)) {
+                alert('Por favor, ingresa un correo válido.');
+                return;
+            }
+
+            if (!validatePhone(phone)) {
+                alert('Por favor, ingresa un número de teléfono válido (10 dígitos).');
+                return;
+            }
+
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+        });
+
+        document.getElementById('next-to-step-3').addEventListener('click', () => {
+            const address = document.getElementById('address').value.trim();
+            const size = document.getElementById('size').value.trim();
+            const stimulatedPrice = document.getElementById('stimulated-price').value.trim();
+
+            if (!address || !size || !stimulatedPrice) {
+                alert('Por favor, completa todos los campos antes de continuar.');
+                return;
+            }
+
+            if (isNaN(size) || size <= 0) {
+                alert('Por favor, ingresa un tamaño válido para el terreno.');
+                return;
+            }
+
+            if (isNaN(stimulatedPrice) || stimulatedPrice <= 0) {
+                alert('Por favor, ingresa un precio estimado válido.');
+                return;
+            }
+
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-3').classList.remove('hidden');
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+
+            document.getElementById('summary').innerHTML = `
+                <p><strong>Nombre:</strong> ${name}</p>
+                <p><strong>Correo:</strong> ${email}</p>
+                <p><strong>Teléfono:</strong> ${phone}</p>
+                <p><strong>Dirección del terreno:</strong> ${address}</p>
+                <p><strong>Tamaño del terreno:</strong> ${size} m²</p>
+                <p><strong>Precio estimado:</strong> $${stimulatedPrice}</p>
+            `;
+        });
+
+        document.getElementById('submit').addEventListener('click', () => {
+            alert('¡Formulario enviado con éxito!');
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('congratulations').classList.remove('hidden');
+        });
+
+        document.getElementById('back-to-step-1').addEventListener('click', () => {
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-1').classList.remove('hidden');
+        });
+
+        document.getElementById('back-to-step-2').addEventListener('click', () => {
+            document.getElementById('step-3').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('hidden');
+        });
+
+        // Funciones de validación
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function validatePhone(phone) {
+            const phoneRegex = /^\d{10}$/;
+            return phoneRegex.test(phone);
+        }
+    </script>
+</body>
+</html>
